@@ -57,37 +57,6 @@ sub summarize_new_request
 
 }
 
-sub summarize_new_request
-{
-  open ( FILE, "<$database_path" );
-  @buff = <FILE>;
-  close ( FILE );
-
-  # Aのみ抽出
-  foreach ( @buff )
-  {
-    $_ =~ s/\n//g;
-    @str = split ( /\t/, $_ );
-
-    if ( $str[0] eq 'A' )
-    {
-      push ( @addr, $str[1] );
-    }
-  }
-
-  # AをまとめてNにする
-  $count{$_}++ for ( @addr );
-  &remove_line('A');
-  open ( FILE, ">>$database_path" );
-  foreach my $key ( keys (%count ) )
-  {
-    $val = $count{$key};
-    print FILE "N\t$key\t$val\n";
-  }
-  close ( FILE );
-
-}
-
 sub send_interst
 {
   open ( FILE, "<$database_path" );
@@ -121,4 +90,3 @@ sub send_interst
 
 &summarize_new_request();
 &send_interst();
-
