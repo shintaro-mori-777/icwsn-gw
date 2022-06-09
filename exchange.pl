@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#! /usr/bin/perl
 
 $database_path = "data.log.txt";
 
