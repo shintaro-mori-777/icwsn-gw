@@ -1,8 +1,8 @@
 #! /usr/bin/perl
 
-$database_path = "data.log.txt";
+$database_path = "./data.log.txt";
 
-# $_[0]のみ削除
+# We would like to delete a line regarding $_[0].
 sub remove_line
 {
   open ( FILE, "<$database_path" );
@@ -10,7 +10,6 @@ sub remove_line
   close ( FILE );
 
   open ( FILE, ">$database_path" );
-
 
   foreach ( @buff )
   {
@@ -32,7 +31,7 @@ sub summarize_new_request
   @buff = <FILE>;
   close ( FILE );
 
-  # Aのみ抽出
+  # We would like to highlight the line of 'A.'
   foreach ( @buff )
   {
     $_ =~ s/\n//g;
@@ -44,7 +43,7 @@ sub summarize_new_request
     }
   }
 
-  # AをまとめてNにする
+  # Replacing from 'A' to 'N.'
   $count{$_}++ for ( @addr );
   &remove_line('A');
   open ( FILE, ">>$database_path" );
@@ -64,7 +63,7 @@ sub send_interst
   close ( FILE );
 
   open ( FILE, ">>$database_path" );
-  # Nのみ抽出
+  # We would like to highlight the line of 'N.'
   foreach ( @buff )
   {
     $_ =~ s/\n//g;
